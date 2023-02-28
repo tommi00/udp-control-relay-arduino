@@ -1,5 +1,6 @@
 # udp-control-relay-arduino
 Code to control via network (via UDP protocol) a relay connected to an Arduino Uno, which mounts an ethernet shield. 
+Here you can find the code and the connection scheme.
 
 Created by tommi00 @ GitHub -> https://tommi00.github.io/t 
 
