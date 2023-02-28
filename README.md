@@ -10,4 +10,4 @@ Inspiration taken from: https://docs.arduino.cc/tutorials/ethernet-shield-rev2/u
   To test the message received and the ack sent by Arduino, I use the software "PACKET SENDER".
   It works well, except when I tried to send many equal commands, one after the other quickly. The Arduino had some problem to read the next different message, indeed it added another char if the length was lower. So I had to change the on command to "onn". 
   For example, if I try to send a lot of "off" strings quickly and after them immediately an "on" (or more than one withouth waiting the buffer to empty), the Arduino reads a command "onf", beacuse it tries to receive another three char command and adds as third char the last third char received, which is the last "f" from the previous "off" commands sent. Changing the expected message to "onn" which has the same length, seem to solve the problem.
-  Changed to "onnnnnn" & "offffff".
+  Changed to "onnnnnn" & "offffff" to avoid problems with HEX possible messages and #hex.
