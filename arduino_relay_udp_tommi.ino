@@ -2,8 +2,8 @@
 #include <EthernetUdp.h>
 
 const int RELAY_PIN  = 9;                             // relay pin
-const char relayOn[] = "onn";                         //READ THE READ ME FILE TO UNDESTAND 
-const char relayOff[] = "off";
+const char relayOn[] = "onnnnnn";                     //READ THE READ ME FILE TO UNDESTAND 
+const char relayOff[] = "offffff";
 
 int relayState = HIGH;                                 // initial status of the relay
 
@@ -16,6 +16,9 @@ unsigned int localPort = 9001;                        // local port to listen on
 
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];            // buffer to hold incoming packet,
 char ReplyBuffer[] = "acknowledged";                  // a string to send back
+char ReplyOn[] = "ackOn";                              // ack only for when is turned on
+char ReplyOff[] = "ackOff" ;                           // ack only for when is turned off
+
 
 // An EthernetUDP instance to let us send and receive packets over UDP
 EthernetUDP Udp;
@@ -26,12 +29,12 @@ void setup() {
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, HIGH);
 
-  // INITIAL CHECKS:
+  //INITIAL CHECKS:
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for native USB port only
-  }
+  //while (!Serial) {
+  //  ; // wait for serial port to connect. Needed for native USB port only
+  //}
 
   // Check for Ethernet hardware present
   if (Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -80,17 +83,28 @@ void loop() {
       relayState = LOW;
       digitalWrite(RELAY_PIN, relayState);
       Serial.println("relay turned on");
+
+      Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
+      Udp.write(ReplyOn);
+      Udp.endPacket();
+
     }else if (!strcmp(relayOff, packetBuffer) ){
       Serial.println("command OFF received");
       relayState = HIGH;
       digitalWrite(RELAY_PIN, relayState);
       Serial.println("relay turned off");
+
+      Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
+      Udp.write(ReplyOff);
+      Udp.endPacket();
     }
 
+    /*
     // send a reply to the IP address and port that sent us the packet we received
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
     Udp.write(ReplyBuffer);
     Udp.endPacket();
+    */
   }
   delay(10);
 }
