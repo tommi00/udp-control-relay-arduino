@@ -26,6 +26,7 @@ void setup() {
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, HIGH);
 
+  // INITIAL CHECKS:
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
