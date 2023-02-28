@@ -1,21 +1,21 @@
 #include <Ethernet.h>
 #include <EthernetUdp.h>
 
-const int RELAY_PIN  = 9;                             // RELAY PIN
-const char relayOn[] = "on";
+const int RELAY_PIN  = 9;                             // relay pin
+const char relayOn[] = "onn";                         //READ THE READ ME FILE TO UNDESTAND 
 const char relayOff[] = "off";
 
-int relayState = HIGH;                                 // STATO INIZIALE RELAY
+int relayState = HIGH;                                 // initial status of the relay
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };  // mac address (keep this one when unknown)
 byte ip[] = { 192, 168, 2, 50 };                      // ip address
 byte gateway[] = { 192, 168, 2, 1 };                  // gateway rete
 byte subnet[] = { 255, 255, 255, 0 };                 // subnet mask
 
-unsigned int localPort = 9001;      // local port to listen on
+unsigned int localPort = 9001;                        // local port to listen on
 
-char packetBuffer[UDP_TX_PACKET_MAX_SIZE];  // buffer to hold incoming packet,
-char ReplyBuffer[] = "acknowledged";        // a string to send back
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE];            // buffer to hold incoming packet,
+char ReplyBuffer[] = "acknowledged";                  // a string to send back
 
 // An EthernetUDP instance to let us send and receive packets over UDP
 EthernetUDP Udp;
