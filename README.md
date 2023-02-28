@@ -5,6 +5,7 @@ Created by tommi00 @ GitHub -> https://tommi00.github.io/t
 
 Inspiration taken from: https://docs.arduino.cc/tutorials/ethernet-shield-rev2/udp-send-receive-string 
 
+>> TCP VERSION: https://github.com/tommi00/tcp-control-relay-arduino
 
 **I tested the code with an Arduino Uno, an Ethernet Shield & a relay module, connected to my network on ip 192.168.2.50 and port 9001. 
   To test the message received and the ack sent by Arduino, I use the software "PACKET SENDER".
